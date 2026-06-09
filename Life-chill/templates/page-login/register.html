@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Nexus — Khai sinh không gian | Đăng ký</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg0: #0a0a0f;
+    --bg1: #111118;
+    --bg2: #17171f;
+    --bg3: #1f1f2a;
+    --bg4: #26263a;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --text0: #f0eeff;
+    --text1: #b8b4d4;
+    --text2: #6e6a8a;
+    --accent: #7c6af7;
+    --accent2: #a78bf5;
+    --accent-glow: rgba(124,106,247,0.18);
+    --teal: #3dd6b5;
+    --teal-glow: rgba(61,214,181,0.12);
+    --rose: #f76a8a;
+    --amber: #f7a94a;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --r: 14px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+  }
+
+  body {
+    background: var(--bg0);
+    color: var(--text0);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .6;
+  }
+
+  .ambient {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .35;
+  }
+  .amb-1 { width: 500px; height: 500px; top: -150px; left: -100px; background: radial-gradient(circle, #3a2f8a 0%, transparent 70%); }
+  .amb-2 { width: 400px; height: 400px; bottom: 0; right: -100px; background: radial-gradient(circle, #1a3a4a 0%, transparent 70%); }
+  .amb-3 { width: 300px; height: 300px; top: 40%; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, #2a1a4a 0%, transparent 70%); }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10,10,15,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 16px;
+  }
+
+  .logo {
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text0);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--accent), var(--teal));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text1);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all .2s;
+  }
+  .nav-links a:hover {
+    color: var(--text0);
+    background: var(--surface-hover);
+  }
+
+  .back-home {
+    color: var(--accent2);
+    background: var(--surface);
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all .2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+  }
+  .back-home:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    color: var(--text0);
+  }
+
+  .auth-section {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 24px;
+  }
+
+  .glass-card {
+    background: var(--bg1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 32px 28px;
+    width: 100%;
+    max-width: 480px;
+    transition: all 0.3s;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,106,247,0.1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(124,106,247,0.3);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,106,247,0.2);
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .form-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--accent-glow), var(--teal-glow));
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+  }
+  .form-header h2 {
+    font-family: var(--font-head);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--text0), var(--accent2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .form-header p {
+    font-size: 14px;
+    color: var(--text2);
+    margin-top: 8px;
+  }
+
+  .input-group {
+    margin-bottom: 20px;
+  }
+  .input-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 8px;
+  }
+  .input-field {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text0);
+    transition: all 0.2s;
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .input-field::placeholder {
+    color: var(--text2);
+  }
+
+  .code-hint {
+    font-size: 11px;
+    color: var(--teal);
+    background: var(--teal-glow);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(105deg, var(--accent), #5f4ae0);
+    border: none;
+    border-radius: var(--r);
+    padding: 12px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124,106,247,0.4);
+  }
+
+  .auth-footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 8px;
+  }
+  .auth-footer a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .auth-footer a:hover {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+
+  .error-message {
+    background: rgba(247,106,138,0.1);
+    border-left: 3px solid var(--rose);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #ff98b0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .success-message {
+    background: rgba(61,214,181,0.1);
+    border-left: 3px solid var(--teal);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text2);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .glass-card { padding: 24px 20px; }
+    .auth-section { padding: 40px 16px; }
+  }
+
+  .floating-shape {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(61,214,181,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: 5%;
+    right: -50px;
+    filter: blur(55px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .strength-badge {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+    gap: 6px;
+  }
+  .strength {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 40px;
+    background: var(--bg4);
+    color: var(--text2);
+  }
+</style>
+</head>
+<body>
+<div class="ambient amb-1"></div>
+<div class="ambient amb-2"></div>
+<div class="ambient amb-3"></div>
+<div class="floating-shape"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="/">
+        <div class="logo-icon">✦</div>
+        Nexus
+      </a>
+      <ul class="nav-links">
+        <li><a href="/pages/game">Game</a></li>
+        <li><a href="/pages/film">Films</a></li>
+        <li><a href="/pages/tasks">Tasks</a></li>
+        <li><a href="/pages/chat">Chat</a></li>
+      </ul>
+      <a href="/pages-login" class="back-home">🔐 Đăng nhập</a>
+    </nav>
+  </div>
+</header>
+
+<section class="auth-section">
+  <div class="wrap" style="max-width: 500px;">
+    <div class="glass-card">
+      <div class="form-header">
+        <div class="form-icon">🚀</div>
+        <h2>Khởi tạo thế giới</h2>
+        <p>Điền thông tin để gia nhập Nexus · Vũ trụ kết nối</p>
+      </div>
+
+      <div id="register-error" class="error-message" style="display: none;">
+        <span>⚠️</span> <span id="error-text"></span>
+      </div>
+      <div id="register-success" class="success-message" style="display: none;">
+        <span>✨</span> <span id="success-text"></span>
+      </div>
+
+      <form id="register-form" action="/register" method="post">
+        <div class="input-group">
+          <label>Tên hiển thị / Username</label>
+          <input type="text" class="input-field" id="reg-name" name="user_name" placeholder="Ví dụ: Stardust, Kaze, Luna" autocomplete="off" required>
+          <div style="font-size: 11px; color: var(--text2); margin-top: 6px;">✦ Dùng để đăng nhập & hồ sơ</div>
+        </div>
+
+        <div class="input-group">
+          <label>Mật khẩu bảo vệ</label>
+          <input type="password" class="input-field" id="reg-password" name="user_mk" placeholder="ít nhất 6 ký tự" autocomplete="new-password" required>
+          <div class="strength-badge" id="pwd-strength"></div>
+        </div>
+
+        <div class="input-group">
+          <label>🔮 Mã khởi tạo (Invitation Code)</label>
+          <input type="text" class="input-field" id="reg-code" name="user_code" placeholder="Nhập mã bí mật" autocomplete="off" required>
+          <div class="code-hint">✨ Đây là mã để tạo tài khoản đặc biệt !!! </div>
+        </div>
+
+        <button type="submit" class="btn-submit">✦ Kích hoạt không gian ✦</button>
+      </form>
+
+      <div class="auth-footer">
+        Đã có hành tinh riêng? <a href="/pages-login">Đăng nhập ngay</a><br>
+        <span style="font-size: 11px;">🌙 Mỗi mã khởi tạo mở ra cánh cổng mới — hãy sáng tạo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nexus — nơi lưu giữ những kết nối vĩnh cửu</span>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // Mã khởi tạo hợp lệ (danh sách mặc định đầy thú vị)
+    const VALID_INIT_CODES = [
+      "NEXUS2026", "COSMIC", "STARLIGHT", "WELCOME", "CREATOR", "VOYAGER", 
+      "NEXUS", "DREAMER", "GALAXY", "PHANTOM", "ORIGIN", "KHAI SINH"
+    ];
+    
+    // kiểm tra mã mở đầu (không phân biệt hoa thường)
+    function isValidInitCode(code) {
+      if (!code) return false;
+      const upperCode = code.trim().toUpperCase();
+      return VALID_INIT_CODES.some(valid => valid.toUpperCase() === upperCode);
+    }
+
+    // lấy danh sách user từ localStorage
+    function getUsers() {
+      const raw = localStorage.getItem('nexus_users');
+      if (!raw) return [];
+      try {
+        return JSON.parse(raw);
+      } catch(e) { return []; }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('nexus_users', JSON.stringify(users));
+    }
+
+    // tạo id ngẫu nhiên, unique
+    function generateUserId() {
+      return 'UID_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    }
+
+    // hiển thị lỗi
+    function showError(message) {
+      const errDiv = document.getElementById('register-error');
+      const errSpan = document.getElementById('error-text');
+      errSpan.innerText = message;
+      errDiv.style.display = 'flex';
+      const successDiv = document.getElementById('register-success');
+      successDiv.style.display = 'none';
+      setTimeout(() => {
+        errDiv.style.display = 'none';
+      }, 3800);
+    }
+
+    function showSuccess(message, redirectAfter = true) {
+      const successDiv = document.getElementById('register-success');
+      const successSpan = document.getElementById('success-text');
+      successSpan.innerText = message;
+      successDiv.style.display = 'flex';
+      const errDiv = document.getElementById('register-error');
+      errDiv.style.display = 'none';
+      if (redirectAfter) {
+        setTimeout(() => {
+          window.location.href = '/pages-login';
+        }, 1800);
+      }
+    }
+
+    // mật khẩu strength (chỉ để sinh động)
+    const pwdInput = document.getElementById('reg-password');
+    const strengthDiv = document.getElementById('pwd-strength');
+    function updateStrength() {
+      const val = pwdInput.value;
+      if (!val) { strengthDiv.innerHTML = ''; return; }
+      let strength = '';
+      if (val.length < 4) strength = '⚠️ Yếu';
+      else if (val.length < 7) strength = '🌟 Trung bình';
+      else strength = '💪 Mạnh - an toàn';
+      strengthDiv.innerHTML = `<span class="strength">${strength}</span>`;
+    }
+    pwdInput.addEventListener('input', updateStrength);
+
+    // xử lý đăng ký
+    const form = document.getElementById('register-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('reg-name').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const initCode = document.getElementById('reg-code').value.trim();
+
+      // validation cơ bản
+      if (!name || !password || !initCode) {
+        showError('Vui lòng điền đầy đủ tên, mật khẩu và mã khởi tạo.');
+        return;
+      }
+      if (name.length < 3) {
+        showError('Tên hiển thị phải có ít nhất 3 ký tự.');
+        return;
+      }
+      if (password.length < 4) {
+        showError('Mật khẩu cần ít nhất 4 ký tự để bảo vệ không gian.');
+        return;
+      }
+      
+      // kiểm tra mã khởi tạo
+      if (!isValidInitCode(initCode)) {
+        showError(`Mã khởi tạo "${initCode}" không hợp lệ. Hãy thử: NEXUS2026, COSMIC, STARLIGHT hoặc WELCOME. ✨`);
+        return;
+      }
+      
+      const users = getUsers();
+      // kiểm tra trùng tên
+      const userExists = users.some(u => u.name.toLowerCase() === name.toLowerCase());
+      if (userExists) {
+        showError(`Tên "${name}" đã tồn tại trong vũ trụ. Hãy chọn tên khác độc đáo hơn.`);
+        return;
+      }
+      
+      // tạo user mới với thông tin bổ sung
+      const newUser = {
+        id: generateUserId(),
+        name: name,
+        password: password,
+        bio: `✨ Người dùng Nexus — đã gia nhập bằng mã "${initCode}". Hãy khám phá những điều kỳ diệu.`,
+        role: 'Thành viên',
+        createdAt: new Date().toISOString()
+      };
+      
+      users.push(newUser);
+      saveUsers(users);
+      
+      // thông báo thành công và chuyển về login
+      showSuccess(`Chúc mừng ${name}! Tài khoản Nexus đã được khởi tạo. Vui lòng đăng nhập.`, true);
+      
+      // xóa form
+      form.reset();
+      strengthDiv.innerHTML = '';
+    });
+  })();
+</script>
+</body>
+</html>
